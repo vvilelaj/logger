@@ -37,19 +37,23 @@ namespace MyLogger.Plugins.DbPlugins
 
             this.configManager = configManager;
 
-            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.ServerName, "configManager.ServerName", "SqlServerPlugin");
-            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.Database, "configManager.Database", "SqlServerPlugin");
-            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.UserId, "configManager.UserId", "SqlServerPlugin");
-            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.Password, "configManager.Password", "SqlServerPlugin");
+            dbParams = LoadDbParamsFromConfig();
+        }
 
-            this.dbParams = new DbParams
+        private DbParams LoadDbParamsFromConfig()
+        {
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(this.configManager.ServerName, "configManager.ServerName", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(this.configManager.Database, "configManager.Database", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(this.configManager.UserId, "configManager.UserId", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(this.configManager.Password, "configManager.Password", "SqlServerPlugin");
+
+            return new DbParams
             {
-                ServerName = configManager.ServerName,
-                Database = configManager.Database,
-                UserId = configManager.UserId,
-                Password = configManager.Password,
+                ServerName = this.configManager.ServerName,
+                Database = this.configManager.Database,
+                UserId = this.configManager.UserId,
+                Password = this.configManager.Password,
             };
-
         }
 
         public void Log(DateTime date, Severity severity, string message)
@@ -81,7 +85,7 @@ namespace MyLogger.Plugins.DbPlugins
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
-                throw ex;
+                throw;
             }
 
         }
