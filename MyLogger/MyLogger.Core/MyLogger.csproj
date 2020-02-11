@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Core\Plugin\IPlugin.cs" />
     <Compile Include="Core\Logger.cs" />
+    <Compile Include="Plugins\ConsolePlugin.cs" />
     <Compile Include="Plugins\DbPlugins\DbParams.cs" />
     <Compile Include="Plugins\DbPlugins\SqlServerPlugin.cs" />
     <Compile Include="Plugins\FileSystemPlugins\TextFilePlugin.cs" />
