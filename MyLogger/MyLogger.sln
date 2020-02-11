@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLogger.Core", "MyLogger.Core\MyLogger.Core.csproj", "{960A6EED-B168-4B0A-999D-C160AD94BA23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLogger", "MyLogger.Core\MyLogger.csproj", "{960A6EED-B168-4B0A-999D-C160AD94BA23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLogger.Core.UnitTests", "MyLogger.Core.UnitTests\MyLogger.Core.UnitTests.csproj", "{AF8F2522-F73F-4109-9FF8-A23B761FE6A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLogger.UnitTests", "MyLogger.Core.UnitTests\MyLogger.UnitTests.csproj", "{AF8F2522-F73F-4109-9FF8-A23B761FE6A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp", "ClientApp\ClientApp.csproj", "{2EA5DD25-51D4-430D-B012-A84618675F48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AF8F2522-F73F-4109-9FF8-A23B761FE6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF8F2522-F73F-4109-9FF8-A23B761FE6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF8F2522-F73F-4109-9FF8-A23B761FE6A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EA5DD25-51D4-430D-B012-A84618675F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EA5DD25-51D4-430D-B012-A84618675F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EA5DD25-51D4-430D-B012-A84618675F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EA5DD25-51D4-430D-B012-A84618675F48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

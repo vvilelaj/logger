@@ -7,8 +7,8 @@
     <ProjectGuid>{960A6EED-B168-4B0A-999D-C160AD94BA23}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyLogger.Core</RootNamespace>
-    <AssemblyName>MyLogger.Core</AssemblyName>
+    <RootNamespace>MyLogger</RootNamespace>
+    <AssemblyName>MyLogger</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,10 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Plugin\IPlugin.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Core\Plugin\IPlugin.cs" />
+    <Compile Include="Core\Logger.cs" />
+    <Compile Include="Plugins\DbPlugins\DbParams.cs" />
+    <Compile Include="Plugins\DbPlugins\SqlServerPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Plugin\Severity.cs" />
+    <Compile Include="Core\Plugin\Severity.cs" />
+    <Compile Include="Shared\ConfigManager\ConfigManager.cs" />
+    <Compile Include="Shared\ConfigManager\IConfigManager.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

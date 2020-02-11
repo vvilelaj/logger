@@ -8,8 +8,8 @@
     <ProjectGuid>{AF8F2522-F73F-4109-9FF8-A23B761FE6A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyLogger.Core.UnitTests</RootNamespace>
-    <AssemblyName>MyLogger.Core.UnitTests</AssemblyName>
+    <RootNamespace>MyLogger.UnitTests</RootNamespace>
+    <AssemblyName>MyLogger.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -62,18 +62,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoggerUnitTests.cs" />
+    <Compile Include="Core\LoggerUnitTests.cs" />
+    <Compile Include="Plugins\DbPlugins\SqlServerPluginUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyLogger.Core\MyLogger.Core.csproj">
+    <ProjectReference Include="..\MyLogger.Core\MyLogger.csproj">
       <Project>{960a6eed-b168-4b0a-999d-c160ad94ba23}</Project>
-      <Name>MyLogger.Core</Name>
+      <Name>MyLogger</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
