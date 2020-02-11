@@ -26,5 +26,15 @@ namespace MyLogger.Core
                 p.Log(DateTime.Now, Severity.Warning, message);
             }
         }
+
+        public void LogInfo(string message)
+        {
+            if (string.IsNullOrEmpty(message)) throw new ArgumentNullException("message", "Logger.LogInfo : message is null or empty.");
+
+            foreach (var p in plugins)
+            {
+                p.Log(DateTime.Now, Severity.Info, message);
+            }
+        }
     }
 }
