@@ -277,7 +277,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
             }
         }
 
-s
+
         //public class Log
         //{
         //    [TestMethod]
