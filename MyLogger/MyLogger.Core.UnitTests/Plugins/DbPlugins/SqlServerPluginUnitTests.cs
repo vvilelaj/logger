@@ -14,18 +14,18 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
     [TestClass]
     public class SqlServerPluginUnitTests
     {
-        [TestMethod]
-        public void SqlServerPluginMustImplementIPlugin()
-        {
-            // Arrange
-            IPlugin p;
+        //[TestMethod]
+        //public void SqlServerPluginMustImplementIPlugin()
+        //{
+        //    // Arrange
+        //    IPlugin p;
 
-            // Act
-            p = new SqlServerPlugin();
+        //    // Act
+        //    p = new SqlServerPlugin(configManager.Object);
 
-            // Assert
-            Assert.IsTrue(p is IPlugin);
-        }
+        //    // Assert
+        //    Assert.IsTrue(p is IPlugin);
+        //}
 
         [TestClass]
         public class ConstructorDbParams
@@ -41,7 +41,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     var dbParams = (DbParams)null;
 
                     // Act
-                    var plugin = new SqlServerPlugin(dbParams);
+                    IPlugin plugin = new SqlServerPlugin(dbParams);
                 }
                 catch (Exception ex)
                 {
@@ -64,7 +64,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     var dbParams = new DbParams { ServerName = (string)null };
 
                     // Act
-                    var plugin = new SqlServerPlugin(dbParams);
+                    IPlugin plugin = new SqlServerPlugin(dbParams);
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +87,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     var dbParams = new DbParams { ServerName = "servername", Database = (string)null };
 
                     // Act
-                    var plugin = new SqlServerPlugin(dbParams);
+                    IPlugin plugin = new SqlServerPlugin(dbParams);
                 }
                 catch (Exception ex)
                 {
@@ -110,7 +110,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     var dbParams = new DbParams { ServerName = "servername", Database = "db", UserId = (string)null };
 
                     // Act
-                    var plugin = new SqlServerPlugin(dbParams);
+                    IPlugin plugin = new SqlServerPlugin(dbParams);
                 }
                 catch (Exception ex)
                 {
@@ -133,7 +133,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     var dbParams = new DbParams { ServerName = "servername", Database = "db", UserId = "user", Password = (string)null };
 
                     // Act
-                    var plugin = new SqlServerPlugin(dbParams);
+                    IPlugin plugin = new SqlServerPlugin(dbParams);
                 }
                 catch (Exception ex)
                 {
@@ -160,7 +160,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     IConfigManager configManager=null;
 
                     // Act
-                    var plugin = new SqlServerPlugin(configManager);
+                    IPlugin plugin = new SqlServerPlugin(configManager);
                 }
                 catch (Exception ex)
                 {
@@ -184,7 +184,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     configManager.Setup(x => x.ServerName).Returns(string.Empty);
 
                     // Act
-                    var plugin = new SqlServerPlugin(configManager.Object);
+                    IPlugin plugin = new SqlServerPlugin(configManager.Object);
                 }
                 catch (Exception ex)
                 {
@@ -209,7 +209,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
                     configManager.Setup(x => x.Database).Returns(string.Empty);
 
                     // Act
-                    var plugin = new SqlServerPlugin(configManager.Object);
+                    IPlugin plugin = new SqlServerPlugin(configManager.Object);
                 }
                 catch (Exception ex)
                 {
@@ -236,7 +236,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
 
 
                     // Act
-                    var plugin = new SqlServerPlugin(configManager.Object);
+                    IPlugin plugin = new SqlServerPlugin(configManager.Object);
                 }
                 catch (Exception ex)
                 {
@@ -264,7 +264,7 @@ namespace MyLogger.UnitTests.Plugins.DbPlugins
 
 
                     // Act
-                    var plugin = new SqlServerPlugin(configManager.Object);
+                    IPlugin plugin = new SqlServerPlugin(configManager.Object);
                 }
                 catch (Exception ex)
                 {

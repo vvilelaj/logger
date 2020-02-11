@@ -1,4 +1,5 @@
 ﻿using MyLogger.Core.Plugin;
+using MyLogger.Shared;
 using MyLogger.Shared.ConfigManager;
 using System;
 using System.Collections.Generic;
@@ -22,18 +23,12 @@ namespace MyLogger.Plugins.DbPlugins
         {
             if (dbParams == null) throw new ArgumentNullException("dbParams", "SqlServerPlugin : dbParams is null.");
 
-            ThowExceptionWhenIsNullOrEmpty(dbParams.ServerName, "dbParams.ServerName", "SqlServerPlugin");
-            ThowExceptionWhenIsNullOrEmpty(dbParams.Database, "dbParams.Database", "SqlServerPlugin");
-            ThowExceptionWhenIsNullOrEmpty(dbParams.UserId, "dbParams.UserId", "SqlServerPlugin");
-            ThowExceptionWhenIsNullOrEmpty(dbParams.Password, "dbParams.Password", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(dbParams.ServerName, "dbParams.ServerName", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(dbParams.Database, "dbParams.Database", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(dbParams.UserId, "dbParams.UserId", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(dbParams.Password, "dbParams.Password", "SqlServerPlugin");
 
             this.dbParams = dbParams;
-        }
-
-
-        private static void ThowExceptionWhenIsNullOrEmpty(string paramValue, string paramName, string methodName)
-        {
-            if (string.IsNullOrEmpty(paramValue)) throw new ArgumentNullException(paramName, $"{methodName} : {paramName} is null or empty.");
         }
 
         public SqlServerPlugin(IConfigManager configManager)
@@ -42,10 +37,10 @@ namespace MyLogger.Plugins.DbPlugins
 
             this.configManager = configManager;
 
-            ThowExceptionWhenIsNullOrEmpty(configManager.ServerName, "configManager.ServerName", "SqlServerPlugin");
-            ThowExceptionWhenIsNullOrEmpty(configManager.Database, "configManager.Database", "SqlServerPlugin");
-            ThowExceptionWhenIsNullOrEmpty(configManager.UserId, "configManager.UserId", "SqlServerPlugin");
-            ThowExceptionWhenIsNullOrEmpty(configManager.Password, "configManager.Password", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.ServerName, "configManager.ServerName", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.Database, "configManager.Database", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.UserId, "configManager.UserId", "SqlServerPlugin");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(configManager.Password, "configManager.Password", "SqlServerPlugin");
 
             this.dbParams = new DbParams
             {

@@ -50,6 +50,7 @@
     <Compile Include="Core\Plugin\Severity.cs" />
     <Compile Include="Shared\ConfigManager\ConfigManager.cs" />
     <Compile Include="Shared\ConfigManager\IConfigManager.cs" />
+    <Compile Include="Shared\ParameterValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

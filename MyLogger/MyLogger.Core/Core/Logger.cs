@@ -1,4 +1,5 @@
 ﻿using MyLogger.Core.Plugin;
+using MyLogger.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace MyLogger.Core
         {
             if (!this.severities.Any(x => x == Severity.Warning)) return;
 
-            if (string.IsNullOrEmpty(message)) throw new ArgumentNullException("message", "Logger.LogWarning : message is null or empty.");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(message, "message", "Logger.LogWarning");
 
             foreach (var p in plugins)
             {
@@ -64,7 +65,7 @@ namespace MyLogger.Core
         {
             if (!this.severities.Any(x => x == Severity.Info)) return;
 
-            if (string.IsNullOrEmpty(message)) throw new ArgumentNullException("message", "Logger.LogInfo : message is null or empty.");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(message, "message", "Logger.LogInfo");
 
             foreach (var p in plugins)
             {
@@ -76,7 +77,7 @@ namespace MyLogger.Core
         {
             if (!this.severities.Any(x => x == Severity.Error)) return;
 
-            if (string.IsNullOrEmpty(message)) throw new ArgumentNullException("message", "Logger.LogError : message is null or empty.");
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(message, "message", "Logger.LogError");
 
             foreach (var p in plugins)
             {
@@ -86,7 +87,7 @@ namespace MyLogger.Core
 
         public void AddPlugin(IPlugin plugin)
         {
-            if (plugin == null) throw new ArgumentNullException("plugin", "Logger.AddPlugin : plugin is null.");
+            ParameterValidator.ThowExceptionWhenIsNull(plugin, "plugin", "Logger.AddPlugin");
 
             this.plugins.Add(plugin);
         }
