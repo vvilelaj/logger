@@ -62,7 +62,8 @@ namespace MyLogger.Plugins.FileSystemPlugins
         {
             try
             {
-                var logName = $"{this.fsParams.LogName}{this.fsParams.LogExtension}";
+                var dateStr = DateTime.Now.ToShortDateString();
+                var logName = $"{dateStr}_{this.fsParams.LogName}{this.fsParams.LogExtension}";
                 var logPath = Path.Combine(this.fsParams.LogPath, logName);
                 var logMessage = $"{date.ToString()} - {severity.ToString()} : {message}";
                 using (var sw = new StreamWriter(logPath, true))

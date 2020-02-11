@@ -54,7 +54,7 @@ namespace MyLogger.Core
             if (!this.severities.Any(x => x == Severity.Warning)) return;
 
             ParameterValidator.ThowExceptionWhenIsNullOrEmpty(message, "message", "Logger.LogWarning");
-
+            var date = DateTime.Now;
             foreach (var p in plugins)
             {
                 p.Log(DateTime.Now, Severity.Warning, message);
@@ -66,10 +66,10 @@ namespace MyLogger.Core
             if (!this.severities.Any(x => x == Severity.Info)) return;
 
             ParameterValidator.ThowExceptionWhenIsNullOrEmpty(message, "message", "Logger.LogInfo");
-
+            var date = DateTime.Now;
             foreach (var p in plugins)
             {
-                p.Log(DateTime.Now, Severity.Info, message);
+                p.Log(date, Severity.Info, message);
             }
         }
 
@@ -78,10 +78,10 @@ namespace MyLogger.Core
             if (!this.severities.Any(x => x == Severity.Error)) return;
 
             ParameterValidator.ThowExceptionWhenIsNullOrEmpty(message, "message", "Logger.LogError");
-
+            var date = DateTime.Now;
             foreach (var p in plugins)
             {
-                p.Log(DateTime.Now, Severity.Error, message);
+                p.Log(date, Severity.Error, message);
             }
         }
 
