@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyLogger.Core
+namespace MyLogger.Core.Plugin
 {
     public interface IPlugin
     {
