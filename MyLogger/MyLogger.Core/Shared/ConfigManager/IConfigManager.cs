@@ -12,5 +12,8 @@ namespace MyLogger.Shared.ConfigManager
         string Database { get; }
         string UserId { get; }
         string Password { get; }
+        string LogPath { get; }
+        string LogName { get; }
+        string LogExtension { get; }
     }
 }

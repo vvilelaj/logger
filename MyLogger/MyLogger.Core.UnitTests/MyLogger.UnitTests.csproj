@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Core\LoggerUnitTests.cs" />
     <Compile Include="Plugins\DbPlugins\SqlServerPluginUnitTests.cs" />
+    <Compile Include="Plugins\FileSystemPlugins\TextFilePluginUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
