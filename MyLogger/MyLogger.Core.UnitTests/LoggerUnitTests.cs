@@ -253,5 +253,94 @@ namespace MyLogger.Core.UnitTests
                     , Times.Once);
             }
         }
+
+        [TestClass]
+        public class LogError
+
+        {
+            [TestInitialize]
+            public void Test_Initialize()
+            {
+                exceptionMessage = string.Empty;
+                plugins = new List<IPlugin>();
+                p1 = new Mock<IPlugin>();
+                p2 = new Mock<IPlugin>();
+                plugins.Add(p1.Object);
+                plugins.Add(p2.Object);
+
+            }
+
+            [TestCleanup]
+            public void Test_Cleanup()
+            {
+                exceptionMessage = null;
+                plugins = null;
+                p1 = null;
+                p2 = null;
+            }
+
+            [TestMethod]
+            public void WhenLogsANullMessage_ThenExceptionMsgIsNullOrEmty()
+            {
+                try
+                {
+                    // Arrange
+                    var logger = new Logger(plugins);
+
+                    // Act 
+                    logger.LogError(null);
+                }
+                catch (Exception ex)
+                {
+                    exceptionMessage = ex.Message;
+                }
+
+                // Assert
+                StringAssert.Contains(exceptionMessage, "Logger.LogError : message is null or empty.");
+            }
+
+            [TestMethod]
+            public void WhenLogsAnEmptyMessage_ThenExceptionMsgIsNullOrEmty()
+            {
+                try
+                {
+                    // Arrange
+                    var logger = new Logger(plugins);
+
+                    // Act 
+                    logger.LogError(string.Empty);
+                }
+                catch (Exception ex)
+                {
+                    exceptionMessage = ex.Message;
+                }
+
+                // Assert
+                StringAssert.Contains(exceptionMessage, "Logger.LogError : message is null or empty.");
+            }
+
+            [TestMethod]
+            public void WhenLogsWarning_ThenInvokePluginLogMethod()
+            {
+                // Arrange
+                var logger = new Logger(plugins);
+
+                // Act 
+                logger.LogError("A error");
+
+                //  Assert
+                p1.Verify(x => x.Log(
+                    It.IsAny<DateTime>(),
+                    It.Is<Severity>(s => s == Severity.Error),
+                     It.Is<string>(str => str == "A error"))
+                    , Times.Once);
+                //
+                p2.Verify(x => x.Log(
+                    It.IsAny<DateTime>(),
+                    It.Is<Severity>(s => s == Severity.Error),
+                     It.Is<string>(str => str == "A error"))
+                    , Times.Once);
+            }
+        }
     }
 }
