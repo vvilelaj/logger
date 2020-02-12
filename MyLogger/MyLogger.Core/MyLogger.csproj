@@ -49,6 +49,8 @@
     <Compile Include="Plugins\DbPlugins\SqlServerPlugin.cs" />
     <Compile Include="Plugins\FileSystemPlugins\TextFilePlugin.cs" />
     <Compile Include="Plugins\FileSystemPlugins\FsParams.cs" />
+    <Compile Include="Plugins\Plugin.cs" />
+    <Compile Include="Plugins\PluginFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Plugin\Severity.cs" />
     <Compile Include="Shared\ConfigManager\ConfigManager.cs" />

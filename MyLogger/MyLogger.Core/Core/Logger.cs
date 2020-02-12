@@ -10,7 +10,7 @@ namespace MyLogger.Core
 {
     public class Logger
     {
-        private readonly List<IPlugin> plugins;
+        private readonly Dictionary<string, IPlugin> plugins;
         private readonly List<Severity> severities;
 
         public int PluginsCount
@@ -31,16 +31,16 @@ namespace MyLogger.Core
 
         public Logger()
         {
-            plugins = new List<IPlugin>();
+            plugins = new Dictionary<string, IPlugin>();
             severities = new List<Severity>();
         }
 
-        public Logger(List<IPlugin> plugins)
-        {
-            if (plugins == null || plugins.Count == 0) throw new ArgumentNullException("plugins", "Logger : plugins are null or empty.");
+        //public Logger(List<IPlugin> plugins)
+        //{
+        //    if (plugins == null || plugins.Count == 0) throw new ArgumentNullException("plugins", "Logger : plugins are null or empty.");
 
-            this.plugins = plugins;
-        }
+        //    this.plugins = plugins;
+        //}
 
         public Logger(List<Severity> severities)
         {
@@ -57,7 +57,7 @@ namespace MyLogger.Core
             var date = DateTime.Now;
             foreach (var p in plugins)
             {
-                p.Log(DateTime.Now, Severity.Warning, message);
+                p.Value.Log(DateTime.Now, Severity.Warning, message);
             }
         }
 
@@ -69,7 +69,7 @@ namespace MyLogger.Core
             var date = DateTime.Now;
             foreach (var p in plugins)
             {
-                p.Log(date, Severity.Info, message);
+                p.Value.Log(date, Severity.Info, message);
             }
         }
 
@@ -81,20 +81,45 @@ namespace MyLogger.Core
             var date = DateTime.Now;
             foreach (var p in plugins)
             {
-                p.Log(date, Severity.Error, message);
+                p.Value.Log(date, Severity.Error, message);
             }
         }
 
-        public void AddPlugin(IPlugin plugin)
+        public void AddPlugin(string key, IPlugin plugin)
         {
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(key, "key", "Logger.AddPlugin");
+
             ParameterValidator.ThowExceptionWhenIsNull(plugin, "plugin", "Logger.AddPlugin");
 
-            this.plugins.Add(plugin);
+            if (this.plugins.ContainsKey(key)) throw new ArgumentException("Logger.AddPlugin : key is duplicated.", "key");
+
+            this.plugins.Add(key, plugin);
+        }
+
+        public void RemovePlugin(string key)
+        {
+            ParameterValidator.ThowExceptionWhenIsNullOrEmpty(key, "key", "Logger.AddPlugin");
+
+            if (this.plugins.ContainsKey(key))
+            {
+                this.plugins.Remove(key);
+            }
         }
 
         public void AddSeverity(Severity severity)
         {
-            this.severities.Add(severity);
+            if (!this.severities.Any(x => x == severity))
+            {
+                this.severities.Add(severity);
+            }
+        }
+
+        public void RemoveSeverity(Severity severity)
+        {
+            if (this.severities.Any(x => x == severity))
+            {
+                this.severities.Remove(severity);
+            }
         }
     }
 }
