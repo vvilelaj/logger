@@ -39,46 +39,46 @@ namespace MyLogger.Core.UnitTests
 
 
 
-            [TestMethod]
-            public void WhenCreatesAnIntanceWithNullPlugins_ThenTrowExceptionPluginsAreNull()
-            {
-                try
-                {
-                    // Arrange
-                    plugins = null;
+            //[TestMethod]
+            //public void WhenCreatesAnIntanceWithNullPlugins_ThenTrowExceptionPluginsAreNull()
+            //{
+            //    try
+            //    {
+            //        // Arrange
+            //        plugins = null;
 
-                    // Act 
-                    var logger = new Logger(plugins);
-                }
-                catch (Exception ex)
-                {
-                    exceptionMessage = ex.Message;
-                }
+            //        // Act 
+            //        var logger = new Logger(plugins);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        exceptionMessage = ex.Message;
+            //    }
 
-                // Assert
-                StringAssert.Contains(exceptionMessage, "Logger : plugins are null or empty.");
-            }
+            //    // Assert
+            //    StringAssert.Contains(exceptionMessage, "Logger : plugins are null or empty.");
+            //}
 
-            [TestMethod]
-            public void WhenCreatesAnIntanceWithNoPlugin_ThenTrowException()
-            {
+            //[TestMethod]
+            //public void WhenCreatesAnIntanceWithNoPlugin_ThenTrowException()
+            //{
 
-                try
-                {
-                    // Arrange
-                    plugins = new List<IPlugin>();
+            //    try
+            //    {
+            //        // Arrange
+            //        plugins = new List<IPlugin>();
 
-                    // Act 
-                    var logger = new Logger(plugins);
-                }
-                catch (Exception ex)
-                {
-                    exceptionMessage = ex.Message;
-                }
+            //        // Act 
+            //        var logger = new Logger(plugins);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        exceptionMessage = ex.Message;
+            //    }
 
-                // Assert
-                StringAssert.Contains(exceptionMessage, "Logger : plugins are null or empty.");
-            }
+            //    // Assert
+            //    StringAssert.Contains(exceptionMessage, "Logger : plugins are null or empty.");
+            //}
 
 
 
@@ -151,11 +151,11 @@ namespace MyLogger.Core.UnitTests
                 {
                     p1 = new Mock<IPlugin>();
                     p2 = new Mock<IPlugin>();
-                    logger.AddPlugin(p1.Object);
-                    logger.AddPlugin(p2.Object);
+                    logger.AddPlugin("key1", p1.Object);
+                    logger.AddPlugin("key2", p2.Object);
                 }
 
-                
+
 
                 [TestCleanup]
                 public void Test_Cleanup()
@@ -251,8 +251,8 @@ namespace MyLogger.Core.UnitTests
                 {
                     p1 = new Mock<IPlugin>();
                     p2 = new Mock<IPlugin>();
-                    logger.AddPlugin(p1.Object);
-                    logger.AddPlugin(p2.Object);
+                    logger.AddPlugin("key1", p1.Object);
+                    logger.AddPlugin("key2", p2.Object);
                 }
 
                 [TestCleanup]
@@ -346,8 +346,8 @@ namespace MyLogger.Core.UnitTests
                 {
                     p1 = new Mock<IPlugin>();
                     p2 = new Mock<IPlugin>();
-                    logger.AddPlugin(p1.Object);
-                    logger.AddPlugin(p2.Object);
+                    logger.AddPlugin("key1", p1.Object);
+                    logger.AddPlugin("key2", p2.Object);
                 }
 
                 private static void RegisterInfoSeverity()
@@ -448,8 +448,8 @@ namespace MyLogger.Core.UnitTests
                 {
                     p1 = new Mock<IPlugin>();
                     p2 = new Mock<IPlugin>();
-                    logger.AddPlugin(p1.Object);
-                    logger.AddPlugin(p2.Object);
+                    logger.AddPlugin("key1", p1.Object);
+                    logger.AddPlugin("key2", p2.Object);
                 }
 
                 [TestCleanup]
@@ -550,8 +550,8 @@ namespace MyLogger.Core.UnitTests
                 {
                     p1 = new Mock<IPlugin>();
                     p2 = new Mock<IPlugin>();
-                    logger.AddPlugin(p1.Object);
-                    logger.AddPlugin(p2.Object);
+                    logger.AddPlugin("key1", p1.Object);
+                    logger.AddPlugin("key2", p2.Object);
                 }
 
                 [TestCleanup]
@@ -647,8 +647,8 @@ namespace MyLogger.Core.UnitTests
                 {
                     p1 = new Mock<IPlugin>();
                     p2 = new Mock<IPlugin>();
-                    logger.AddPlugin(p1.Object);
-                    logger.AddPlugin(p2.Object);
+                    logger.AddPlugin("key1", p1.Object);
+                    logger.AddPlugin("key2", p2.Object);
                 }
 
                 [TestCleanup]
@@ -740,6 +740,28 @@ namespace MyLogger.Core.UnitTests
                 p1 = null;
                 p2 = null;
             }
+
+            [TestMethod]
+            public void WhenKeyIsNullOrEmpty_ThenThrowException()
+            {
+                try
+                {
+                    // Arrange
+                    var logger = new Logger();
+
+                    // Act 
+                    logger.AddPlugin(string.Empty, (IPlugin)null);
+
+                }
+                catch (Exception ex)
+                {
+                    exceptionMessage = ex.Message;
+                }
+
+                // Assert
+                StringAssert.Contains(exceptionMessage, "Logger.AddPlugin : key is null or empty.");
+            }
+
             [TestMethod]
             public void WhenPluginIsNull_ThenThrowException()
             {
@@ -749,7 +771,7 @@ namespace MyLogger.Core.UnitTests
                     var logger = new Logger();
 
                     // Act 
-                    logger.AddPlugin((IPlugin)null);
+                    logger.AddPlugin("key1", (IPlugin)null);
 
                 }
                 catch (Exception ex)
@@ -769,11 +791,34 @@ namespace MyLogger.Core.UnitTests
 
 
                 // Act 
-                logger.AddPlugin(p1.Object);
-                logger.AddPlugin(p2.Object);
+                logger.AddPlugin("key1", p1.Object);
+                logger.AddPlugin("key2", p2.Object);
 
                 //Assert
                 Assert.AreEqual(2, logger.PluginsCount);
+            }
+
+            [TestMethod]
+            public void WhenKeyIsAlDuplicated_ThenThrowException()
+            {
+                try
+                {
+                    // Arrange
+                    var logger = new Logger();
+                    logger.AddPlugin("key1", p1.Object);
+
+
+                    // Act 
+                    logger.AddPlugin("key1", p2.Object);
+
+                }
+                catch (Exception ex)
+                {
+                    exceptionMessage = ex.Message;
+                }
+
+                // Assert
+                StringAssert.Contains(exceptionMessage, "Logger.AddPlugin : key is duplicated.");
             }
         }
 

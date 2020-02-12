@@ -17,9 +17,10 @@ namespace ClientApp
         {
             var logger = new Logger();
             //
-            logger.AddPlugin(new SqlServerPlugin());
-            logger.AddPlugin(new TextFilePlugin());
-            logger.AddPlugin(new ConsolePlugin());
+            logger.AddPlugin("sql", PluginFactory.CreatePlugin(Plugin.SqlServer));
+            logger.AddPlugin("tf1", PluginFactory.CreatePlugin(Plugin.TextFile));
+            logger.AddPlugin("tf2", PluginFactory.CreatePlugin(new FsParams { LogPath="./", LogName="log-file-02",LogExtension=".log" }));
+            logger.AddPlugin("cp", PluginFactory.CreatePlugin(Plugin.Console));
             //
             logger.AddSeverity(Severity.Info);
             logger.AddSeverity(Severity.Warning);
@@ -28,6 +29,18 @@ namespace ClientApp
             logger.LogInfo("test info");
             logger.LogWarning("test warning");
             logger.LogError("test error");
+            //
+            logger.RemovePlugin("tf2");
+            logger.RemoveSeverity(Severity.Error);
+            logger.LogInfo("test info 02");
+            logger.LogWarning("test warning 02");
+            logger.LogError("test error 01");
+
+            //
+            logger.AddSeverity(Severity.Error);
+            logger.LogInfo("test info 03");
+            logger.LogWarning("test warning 03");
+            logger.LogError("test error 03");
         }
     }
 }
